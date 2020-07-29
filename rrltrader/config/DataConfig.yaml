@@ -1,0 +1,3 @@
+ticker: '^GSPC'
+start_date: '2000-01-01'
+end_date: '2005-01-01'

@@ -1,0 +1,11 @@
+n_epoch: 2
+n_possible_transactions : 100000
+transaction_costs : 0.04
+learning_rate : 1.0
+start_period : 1000
+input_size : 200
+trading_periods : 1000
+n_epochs : 10000
+csv_path: "sourcefiles/^GSPC.csv"
+epoch_path: "outputfiles/saved_params"
+weight_path: "outputfiles/saved_params"
