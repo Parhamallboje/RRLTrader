@@ -81,9 +81,6 @@ def dDSRdR(
     else:
         return (b - a * returns[t]) / ((b-a**2)**(1.5))
 
-
-
-
 def ema_mean(
 returns: np.array,
 decay: float,

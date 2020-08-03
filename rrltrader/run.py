@@ -1,6 +1,7 @@
 
 from agents import BaseAgent
-from util import LoadConfig
+from util import LoadConfig, PlotOptimalSharpeRatio, PlotTraining, PlotWeight
+
     
 if __name__ == "__main__":
     dataconfig = LoadConfig('config/DataConfig.yaml')
@@ -13,7 +14,7 @@ if __name__ == "__main__":
         n_epochs = rrltraderconfig["n_epochs"],
         transaction_costs = rrltraderconfig["transaction_costs"],
         input_size = rrltraderconfig["input_size"],
-        added_features= True)
+        added_features = True)
 
     InitialAgent.upload_data(
         ticker = dataconfig['ticker'],
@@ -30,8 +31,12 @@ if __name__ == "__main__":
     #InitialAgent.calculate_cumulative_action_returns()
     #InitialAgent.RewardFunction()
     InitialAgent.fit()
-    InitialAgent.save_weight(
-        epoch_path=rrltraderconfig['epoch_path'],
-        weight_path=rrltraderconfig['weight_path'])
+    PlotOptimalSharpeRatio(InitialAgent)
+    PlotTraining(InitialAgent)
+    PlotWeight(InitialAgent)
+    
+    #InitialAgent.save_weight(
+        #epoch_path=rrltraderconfig['epoch_path'],
+        #weight_path=rrltraderconfig['weight_path'])
 
     
