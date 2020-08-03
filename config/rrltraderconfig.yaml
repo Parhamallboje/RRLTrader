@@ -1,10 +1,12 @@
-n_possible_transactions : 100000
-transaction_costs : 0.05
-learning_rate : 0.5
-start_period : 1000
-input_size : 100
 trading_periods : 1000
+start_period : 1000
+learning_rate : 0.5
 n_epochs : 30000
+transaction_costs : 0.05
+input_size : 10
+features : True
+SMA : True
+epsilon_greedy : True
 csv_path: "sourcefiles/^GSPC.csv"
 epoch_path: "outputfiles/saved_params"
 weight_path: "outputfiles/saved_params"

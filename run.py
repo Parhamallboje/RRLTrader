@@ -14,7 +14,9 @@ if __name__ == "__main__":
         n_epochs = rrltraderconfig["n_epochs"],
         transaction_costs = rrltraderconfig["transaction_costs"],
         input_size = rrltraderconfig["input_size"],
-        added_features = True)
+        added_features = rrltraderconfig["features"],
+        SMA = rrltraderconfig["SMA"],
+        epsilon_greedy = rrltraderconfig["epsilon_greedy"])
 
     InitialAgent.upload_data(
         ticker = dataconfig['ticker'],
@@ -24,13 +26,9 @@ if __name__ == "__main__":
     
     
     #InitialAgent.load_weight(epoch_path=rrltraderconfig['weight_path'])
-    
-    #InitialAgent.simulate_trading_data(method="AFFT")
-    #InitialAgent.set_action_space()
-    #InitialAgent.calculate_action_returns()
-    #InitialAgent.calculate_cumulative_action_returns()
-    #InitialAgent.RewardFunction()
+
     InitialAgent.fit()
+
     PlotOptimalSharpeRatio(InitialAgent)
     PlotTraining(InitialAgent)
     PlotWeight(InitialAgent)

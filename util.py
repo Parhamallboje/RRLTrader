@@ -63,7 +63,7 @@ def PlotTraining(Agent):
     ax[2].set_ylabel("Cumulative Return")
     ax[2].legend(loc="upper left")
     ax[2].grid(True)
-    plt.savefig("outputfiles/graphs/rrl_train{} SMA noFeatures.png".format(str(Agent.input_size)), dpi=300)
+    plt.savefig("outputfiles/graphs/rrl_train{}.png".format(str(Agent.input_size)), dpi=300)
     fig.clear()
 
 def PlotWeight(Agent):
@@ -72,7 +72,7 @@ def PlotWeight(Agent):
     plt.xlabel("Input Vector Order")
     plt.ylabel("Weight")
     plt.grid(True)
-    plt.savefig("outputfiles/graphs/weights{} SMA noFeatures.png".format(str(Agent.input_size)), dpi=300)
+    plt.savefig("outputfiles/graphs/weights{}.png".format(str(Agent.input_size)), dpi=300)
     plt.close
  
 def PlotSMAandPrice(Agent):

@@ -202,18 +202,15 @@ class BaseRRLTrader():
                         pass 
                     
                 else:
-                    if self.simulation:
-                        self.input_vector[i][j] = self.simulated_returns[self.lookback+i-j]
-                    else:
-                        self.input_vector[i][j] = self.returns[self.lookback+i-j]
-
+                    self.input_vector[i][j] = self.returns[self.lookback+i-j]
+            """
             if self.epsilon_greedy:
                 if random.random() > epsilon:
                     self.action_space[i] = np.random.randint(-1,2)
                 else:
                     self.action_space[i] = np.tanh(np.dot(self.w, self.input_vector[i]))
-            else: 
-                self.action_space[i] = np.tanh(np.dot(self.w, self.input_vector[i]))
+            else: """
+            self.action_space[i] = np.tanh(np.dot(self.w, self.input_vector[i]))
 
     def calculate_action_returns(self):
         self.action_returns = (
@@ -263,7 +260,7 @@ class BaseRRLTrader():
             if self.S > self.S_opt:
                 self.S_opt = self.S
                 self.w_opt = self.w.copy()
-            self.epoch_training = np.append(self.epoch_training, self.S)
+            self.epoch_training = np.append(self.epoch_training, self.S_opt)
             if e_index < 0:
                 self.w = np.random.rand(self.input_size+2)
             elif e_index == 0:
