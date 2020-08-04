@@ -24,7 +24,9 @@ class BaseRRLTrader():
         input_size : int,
         added_features = True,
         SMA = False,
-        epsilon_greedy = False):
+        epsilon_greedy = False,
+        epsilon = 0.5,
+        bounds = 3.0):
         """
         Initialisation of the RRLTrader Obj
 
@@ -65,6 +67,9 @@ class BaseRRLTrader():
         self.w_opt = np.ones(self.input_size + 2)
         self.epoch_training = np.empty(0)
         self.epsilon_greedy = epsilon_greedy
+        if self.epsilon_greedy:
+            self.epsilon = epsilon
+            self.bounds = bounds
 
     def add_features(self):
         """
@@ -260,7 +265,7 @@ class BaseRRLTrader():
             if self.S > self.S_opt:
                 self.S_opt = self.S
                 self.w_opt = self.w.copy()
-            self.epoch_training = np.append(self.epoch_training, self.S_opt)
+            self.epoch_training = np.append(self.epoch_training, self.S)
             if e_index < 0:
                 self.w = np.random.rand(self.input_size+2)
             elif e_index == 0:
@@ -277,13 +282,26 @@ class BaseRRLTrader():
         print("Epoch loop end. Optimized Sharpe ratio is " + str(self.S_opt) + ".")
 
     def update_weight(
-        self,
-        epsilon = 0.5):
-        if self.epsilon_greedy == True and random.random() > epsilon:
-            self.w = self.w_opt
-            self.w += self.learning_rate * self.dSdw
+        self):
+        if self.epsilon_greedy: 
+            if random.random() > self.epsilon:
+                self.w = np.random.uniform(
+                    -1 * self.bounds, 
+                    self.bounds,
+                    self.input_size+2)
+                self.RewardFunction()
+                if self.S > self.S_opt:
+                    self.S_opt = self.S
+                    self.w_opt = self.w.copy()
+                else: 
+                    self.w = self.w_opt
+                
+
+            else:
+                self.w += self.learning_rate * self.dSdw
+            
         else:
-            self.w = np.random.rand(self.input_size+2)
+            self.w += self.learning_rate * self.dSdw
 
     def save_weight(
         self,

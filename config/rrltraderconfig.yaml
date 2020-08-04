@@ -3,7 +3,7 @@ start_period : 1000
 learning_rate : 0.5
 n_epochs : 30000
 transaction_costs : 0.05
-input_size : 10
+input_size : 100
 features : True
 SMA : True
 epsilon_greedy : True
