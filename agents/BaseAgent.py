@@ -222,11 +222,8 @@ class BaseRRLTrader():
                 self.action_space[1:] * self.returns[:self.trading_periods] - self.transaction_costs * np.abs(-np.diff(self.action_space)))
             
     def calculate_cumulative_action_returns(self):
-        #print(self.action_returns)
         self.sumR = np.cumsum(self.action_returns[::-1])[::-1]
-        #print(self.sumR)
         self.sumR2 = np.cumsum((self.action_returns**2)[::-1])[::-1]
-        #print(self.sumR2)
 
     def RewardFunction(self):
         self.set_action_space()
@@ -249,16 +246,13 @@ class BaseRRLTrader():
                 self.dFpdw = self.dFdw.copy()
             self.dFdw  = (1 - self.action_space[i]**2) *  (self.input_vector[i] + self.w[self.input_size+1] * self.dFpdw)
             self.dSdw += (self.dSdA * self.dAdR + self.dSdB * self.dBdR[i]) * (self.dRdF[i] * self.dFdw + self.dRdFp[i] * self.dFpdw)
-            #print(self.dSdw)
 
     def fit(self):
-
         pre_epoch_times = len(self.epoch_training)
-
         self.RewardFunction()
         print("Epoch loop start. Initial Sharpe ratio : " + str(self.S) + ".")
         self.S_opt = self.S
-        
+
         tic = time.process_time()
         for e_index in range(self.n_epochs):
             self.RewardFunction()
@@ -289,14 +283,12 @@ class BaseRRLTrader():
                     -1 * self.bounds, 
                     self.bounds,
                     self.input_size+2)
-                self.RewardFunction()
+                self.RewardFunction() 
                 if self.S > self.S_opt:
                     self.S_opt = self.S
                     self.w_opt = self.w.copy()
                 else: 
                     self.w = self.w_opt
-                
-
             else:
                 self.w += self.learning_rate * self.dSdw
             

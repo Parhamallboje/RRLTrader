@@ -1,7 +1,6 @@
 
 from agents import BaseAgent
-from util import LoadConfig, PlotOptimalSharpeRatio, PlotTraining, PlotWeight
-
+from util import LoadConfig, PlotOptimalSharpeRatio, PlotTraining, PlotWeight, PlotSMA
     
 if __name__ == "__main__":
     dataconfig = LoadConfig('config/DataConfig.yaml')
@@ -25,16 +24,12 @@ if __name__ == "__main__":
         csv_path="sourcefiles/^GSPC.csv")
     
     
+    print(InitialAgent.time)
     #InitialAgent.load_weight(epoch_path=rrltraderconfig['weight_path'])
+    #InitialAgent.fit()
 
-    InitialAgent.fit()
+    #PlotOptimalSharpeRatio(InitialAgent)
+    #PlotTraining(InitialAgent)
+    #PlotWeight(InitialAgent)
+    #InitialAgent.save_weight(epoch_path=rrltraderconfig['epoch_path'],weight_path=rrltraderconfig['weight_path'])
 
-    PlotOptimalSharpeRatio(InitialAgent)
-    PlotTraining(InitialAgent)
-    PlotWeight(InitialAgent)
-    
-    #InitialAgent.save_weight(
-        #epoch_path=rrltraderconfig['epoch_path'],
-        #weight_path=rrltraderconfig['weight_path'])
-
-    

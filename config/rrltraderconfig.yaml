@@ -3,10 +3,10 @@ start_period : 1000
 learning_rate : 0.5
 n_epochs : 30000
 transaction_costs : 0.05
-input_size : 100
+input_size : 1
 features : True
-SMA : True
+SMA : False
 epsilon_greedy : True
 csv_path: "sourcefiles/^GSPC.csv"
-epoch_path: "outputfiles/saved_params"
-weight_path: "outputfiles/saved_params"
+epoch_path: "outputfiles/saved_params/Greedy"
+weight_path: "outputfiles/saved_params/Greedy"
